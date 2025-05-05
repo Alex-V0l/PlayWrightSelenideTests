@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+    id("io.qameta.allure") version "2.12.0"
+}
+
+group = 'Vln'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
+    implementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
+    implementation 'io.qameta.allure:allure-rest-assured:2.27.0'
+    implementation 'com.codeborne:selenide:7.3.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.28.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.12.1'
+    testImplementation 'io.qameta.allure:allure-junit5:2.29.1'
+    implementation 'org.seleniumhq.selenium:selenium-devtools-v125:4.23.1'
+    implementation 'com.microsoft.playwright:playwright:1.50.0'
+}
+
+test {
+    useJUnitPlatform()
+}
