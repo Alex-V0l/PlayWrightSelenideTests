@@ -44,6 +44,7 @@ public class LoadingImagesPlaywrightTests extends BasePlaywrightTest{
 
         Assertions.assertTrue(initAmountOfAppearingImages<newAmountOfAppearingImages, "Amount of images must have changed");
         Assertions.assertEquals(expectedTextAfterLoading, loadingImagesPage.getTextAfterLoading(), "Values must be equal");
+        Assertions.assertFalse(loadingImagesPage.isSpinnerVisible(), "Spinner must not be visible");
     }
 
     @DisplayName("Проверка соответствия загруженных картинок")
