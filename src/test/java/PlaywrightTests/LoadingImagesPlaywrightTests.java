@@ -65,4 +65,24 @@ public class LoadingImagesPlaywrightTests extends BasePlaywrightTest{
 
         Assertions.assertEquals(expectedAlt, actualAlt, "Values must be equal");
     }
+
+    @DisplayName("check  text of the footer")
+    @Tags({@Tag("smoke"), @Tag("UI")})
+    @Test
+    void CopyRightTextTest(){
+        String expectedURL = "https://bonigarcia.dev/";
+
+        loadingImagesPage.getDevelopersPageLink();
+
+        Assertions.assertEquals(expectedURL, loadingImagesPage.getCurrentURL(), "Values must be equal");
+    }
+
+    @DisplayName("check  text of the footer")
+    @Tags({@Tag("smoke"), @Tag("UI")})
+    @Test
+    void DevelopersLinkTest(){
+        String expectedFooterText = "Copyright © 2021-2025 Boni García";
+
+        Assertions.assertEquals(expectedFooterText, loadingImagesPage.getCopyrightText(), "Values must be equal");
+    }
 }

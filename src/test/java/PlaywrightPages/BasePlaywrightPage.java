@@ -2,6 +2,7 @@ package PlaywrightPages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import io.qameta.allure.Step;
 
 public class BasePlaywrightPage {
@@ -14,8 +15,8 @@ public class BasePlaywrightPage {
     public BasePlaywrightPage(Page page){
         this.page = page;
         this.subTitle = page.locator(".display-6");
-        this.copyrightText = page.locator("xpath=//span[@class='text-muted' and normalize-space(text())='Copyright © 2021-2025']");
-        this.developersPageLink = page.locator("xpath=//a[@href='https://bonigarcia.dev/']");
+        this.copyrightText = page.getByText("Copyright © 2021-2025 Boni García");
+        this.developersPageLink = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Boni García"));
     }
 
     @Step("get current URL")
@@ -35,6 +36,6 @@ public class BasePlaywrightPage {
 
     @Step("click to link, that leads to bonigarcia")
     public void getDevelopersPageLink(){
-        developersPageLink.evaluate("el => el.click()");
+        developersPageLink.click();
     }
 }
