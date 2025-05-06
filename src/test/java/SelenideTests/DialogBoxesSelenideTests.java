@@ -2,8 +2,9 @@ package SelenideTests;
 
 import SelenidePages.DialogBoxesSelenidePage;
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.ex.AlertNotFoundError;
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.NoAlertPresentException;
+
 
 import static com.codeborne.selenide.Selenide.open;
 
@@ -42,7 +43,7 @@ public class DialogBoxesSelenideTests {
 
         dialogBoxesPage.acceptAlert();
 
-        Assertions.assertThrows(NoAlertPresentException.class, ()-> dialogBoxesPage.switchToAlert());
+        Assertions.assertThrows(AlertNotFoundError.class, ()-> dialogBoxesPage.switchToAlert());
     }
 
     @DisplayName("check that confirm appears after clicking on launch confirm button and text of the confirm")
@@ -59,7 +60,7 @@ public class DialogBoxesSelenideTests {
         dialogBoxesPage.acceptAlert();
 
         Assertions.assertEquals(expectedAfterConfirmText, dialogBoxesPage.getMessageAfterConfirm(), "Values must be equal");
-        Assertions.assertThrows(NoAlertPresentException.class, ()-> dialogBoxesPage.switchToAlert());
+        Assertions.assertThrows(AlertNotFoundError.class, ()-> dialogBoxesPage.switchToAlert());
     }
 
     @DisplayName("check that confirm disappears after dismissing it")
@@ -72,7 +73,7 @@ public class DialogBoxesSelenideTests {
         dialogBoxesPage.dismissAlert();
 
         Assertions.assertEquals(expectedAfterConfirmText, dialogBoxesPage.getMessageAfterConfirm(), "Values must be equal");
-        Assertions.assertThrows(NoAlertPresentException.class, ()-> dialogBoxesPage.switchToAlert());
+        Assertions.assertThrows(AlertNotFoundError.class, ()-> dialogBoxesPage.switchToAlert());
     }
 
     @DisplayName("check that prompt appears after clicking on launch prompt button and text of the prompt")
@@ -98,7 +99,7 @@ public class DialogBoxesSelenideTests {
         dialogBoxesPage.acceptAlert();
 
         Assertions.assertEquals(expectedTextAfterTyping, dialogBoxesPage.getTypedText(), "Values must be equal");
-        Assertions.assertThrows(NoAlertPresentException.class, ()-> dialogBoxesPage.switchToAlert());
+        Assertions.assertThrows(AlertNotFoundError.class, ()-> dialogBoxesPage.switchToAlert());
     }
 
     @DisplayName("check that prompt has disappeared after dismissing it")
@@ -111,7 +112,7 @@ public class DialogBoxesSelenideTests {
         dialogBoxesPage.dismissAlert();
 
         Assertions.assertEquals(expectedTextAfterDismiss, dialogBoxesPage.getTypedText(), "Values must be equal");
-        Assertions.assertThrows(NoAlertPresentException.class, ()-> dialogBoxesPage.switchToAlert());
+        Assertions.assertThrows(AlertNotFoundError.class, ()-> dialogBoxesPage.switchToAlert());
     }
 
     @DisplayName("check that modal appears after clicking on launch modal button, it's text and that it disappears after closing")
@@ -122,14 +123,14 @@ public class DialogBoxesSelenideTests {
         String expectedTextAfterModal = "You chose: Close";
 
         dialogBoxesPage.clickLaunchModal();
-        dialogBoxesPage.isModalVisible();
 
+        Assertions.assertTrue(dialogBoxesPage.isModalVisible(), "Modal should be visible");
         Assertions.assertEquals(expectedModalText, dialogBoxesPage.getModalsText(), "Values must be equal");
 
         dialogBoxesPage.clickCloseButton();
 
         Assertions.assertEquals(expectedTextAfterModal, dialogBoxesPage.getTextAfterModal(), "Values must be equal");
-        Assertions.assertThrows(NoAlertPresentException.class, ()-> dialogBoxesPage.switchToAlert());
+        Assertions.assertThrows(AlertNotFoundError.class, ()-> dialogBoxesPage.switchToAlert());
     }
 
     @DisplayName("check that modal disappears after clicking on save changes button and it's text")
@@ -142,7 +143,7 @@ public class DialogBoxesSelenideTests {
         dialogBoxesPage.clickSaveChanges();
 
         Assertions.assertEquals(expectedAfterModalText, dialogBoxesPage.getTextAfterModal(), "Values must be equal");
-        Assertions.assertThrows(NoAlertPresentException.class, ()-> dialogBoxesPage.switchToAlert());
+        Assertions.assertThrows(AlertNotFoundError.class, ()-> dialogBoxesPage.switchToAlert());
     }
 
     @DisplayName("check  text of the footer")

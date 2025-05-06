@@ -2,6 +2,7 @@ package PlaywrightPages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import io.qameta.allure.Step;
 
 public class LoadingImagesPlaywrightPage extends BasePlaywrightPage{
@@ -12,8 +13,8 @@ public class LoadingImagesPlaywrightPage extends BasePlaywrightPage{
 
     public LoadingImagesPlaywrightPage(Page page) {
         super(page);
-        this.loadingImagesLink = page.locator("xpath=//a[@class='btn btn-outline-primary mb-2' and @href='loading-images.html']");
-        this.appearingImages = page.locator("xpath=//div[@id='image-container']/img");
+        this.loadingImagesLink = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Loading images"));
+        this.appearingImages = page.locator("#image-container").getByRole(AriaRole.IMG);
         this.spinner = page.locator("#spinner");
         this.resultText = page.locator("#text");
     }
